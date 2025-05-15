@@ -145,8 +145,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </main>
                 <footer className="bg-white border-t border-gray-200 text-center py-4 text-sm text-gray-500">
-                    &copy; {new Date().getFullYear()} Web Caffa. Todos
-                    los derechos reservados.
+                    &copy; {new Date().getFullYear()} Web Caffa. Todos los derechos reservados.
                 </footer>
             </div>
         </div>
