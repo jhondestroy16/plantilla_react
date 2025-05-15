@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* si usas un CSS global */
+.select__control {
+    @apply border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500;
+  }
+  .select__menu {
+    @apply bg-white border border-gray-200 rounded-md mt-1;
+  }
+  .select__option--is-focused {
+    @apply bg-indigo-100;
+  }
+  .select__option--is-selected {
+    @apply bg-indigo-200 font-semibold;
+  }
