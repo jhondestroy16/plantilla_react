@@ -54,8 +54,6 @@ class RegisteredUserController extends Controller
 
         $user->assignRole($request->rol);
 
-        // event(new Registered($user));
-
         return redirect(route('usuarios'));
     }
 

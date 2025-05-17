@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('componente')->nullable();
-            $table->integer('icono')->nullable();
+            $table->string('icono')->nullable();
             $table->integer('menu_padre')->nullable();
             $table->string('ruta');
             $table->boolean('estado')->default(true);
             $table->integer('orden');
+
+            $table->foreign('componente')->references('id')->on('rutas_react');
             $table->timestamps();
         });
     }

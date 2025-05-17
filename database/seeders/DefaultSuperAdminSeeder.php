@@ -30,6 +30,7 @@ class DefaultSuperAdminSeeder extends Seeder
                 'name' => 'Administrador Principal',
                 'usuario' => 'super_administrador',
                 'password' => Hash::make('Super123*'),
+                'super_administrador' => true
             ]
         );
 

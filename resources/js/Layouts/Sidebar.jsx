@@ -119,25 +119,25 @@ const Sidebar = ({ user, closeSidebar }) => {
         const isExpanded = expandedMenus[item.id];
         const isActive = item.active || (hasSubItems && isExpanded);
 
+        const baseClasses = "w-full flex items-center justify-between px-3 py-2 text-sm rounded-md cursor-pointer transition-colors";
+        const activeClasses = "bg-pink-400 text-black font-medium";
+        const hoverClasses = "hover:bg-pink-300 hover:text-black";
+
+        const iconColor = isActive ? "text-black" : "text-black group-hover:text-black";
+
         if (hasSubItems) {
             return (
                 <div className={`mb-1 ${level > 0 ? 'ml-2' : ''}`}>
                     <div
                         onClick={(e) => handleMenuClick(item, e)}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-md cursor-pointer transition-colors ${
-                            isActive
-                                ? "bg-[#4a322f] text-white"
-                                : "text-gray-300 hover:bg-[#5a3b37] hover:text-white"
-                        }`}
+                        className={`${baseClasses} ${isActive ? activeClasses : "text-black"} ${hoverClasses} group`}
                     >
                         <div className="flex items-center">
-                            {Icon && <Icon className="w-5 h-5 mr-3" />}
-                            <span className="font-medium">{item.name}</span>
+                            {Icon && <Icon className={`w-5 h-5 mr-3 ${iconColor}`} />}
+                            <span>{item.name}</span>
                         </div>
                         <IoChevronForwardOutline
-                            className={`w-4 h-4 transform transition-transform ${
-                                isExpanded ? "rotate-90" : ""
-                            }`}
+                            className={`w-4 h-4 transform transition-transform ${isExpanded ? "rotate-90" : ""} ${iconColor}`}
                         />
                     </div>
 
@@ -155,15 +155,14 @@ const Sidebar = ({ user, closeSidebar }) => {
         return (
             <Link
                 href={item.href}
-                className={`block px-3 py-2 text-sm rounded-md transition-colors ${
-                    item.active
-                        ? "bg-[#4a322f] text-white font-medium"
-                        : "text-gray-300 hover:bg-[#5a3b37] hover:text-white"
-                }`}
+                className={`block px-3 py-2 text-sm rounded-md transition-colors ${item.active
+                    ? "bg-pink-400 text-black font-medium"
+                    : "text-black hover:bg-pink-300 hover:text-black"
+                    } group`}
                 onClick={closeSidebar}
             >
                 <div className="flex items-center">
-                    {Icon && <Icon className="w-5 h-5 mr-3" />}
+                    {Icon && <Icon className="w-5 h-5 mr-3 text-black group-hover:text-black" />}
                     <span>{item.name}</span>
                 </div>
             </Link>
@@ -171,24 +170,28 @@ const Sidebar = ({ user, closeSidebar }) => {
     };
 
     return (
-        <div className="flex h-full flex-col bg-[#3b2522] shadow-lg">
+        <div className="flex h-full flex-col bg-[#ec4899] shadow-lg">
             {/* Cabecera */}
-            <div className="flex h-16 shrink-0 items-center px-4 bg-[#3b2522] border-b border-[#4a322f]">
-                <Link href="/" className="flex items-center">
-                    <span className="text-xl font-semibold text-white">Web Caffa</span>
+            <div className="flex h-16 shrink-0 items-center px-4 bg-[#ec4899] border-b border-pink-500">
+                <Link href="/">
+                    <img
+                        src="/img/marca.png"
+                        alt="Logo"
+                        className="h-60 w-auto bg-[#ec4899] p-1 rounded"
+                    />
                 </Link>
             </div>
 
             {/* Mostrar error si ocurre */}
             {error && (
-                <div className="flex flex-col p-4 bg-red-50 dark:bg-red-900/20">
-                    <div className="flex items-center text-red-600 dark:text-red-300">
+                <div className="flex flex-col p-4 bg-pink-100">
+                    <div className="flex items-center text-black">
                         <IoAlertCircleOutline className="mr-2 flex-shrink-0" />
                         <span>{error}</span>
                     </div>
                     <button
                         onClick={retryFetch}
-                        className="mt-2 flex items-center justify-center text-sm text-red-700 dark:text-red-200 hover:underline"
+                        className="mt-2 flex items-center justify-center text-sm text-black hover:underline"
                     >
                         <IoReloadOutline className="mr-1" />
                         Reintentar
@@ -197,11 +200,11 @@ const Sidebar = ({ user, closeSidebar }) => {
             )}
 
             {/* Menú de navegación */}
-            <nav className="flex-1 overflow-y-auto px-4 py-6 bg-[#3b2522]">
+            <nav className="flex-1 overflow-y-auto px-4 py-6 bg-[#ec4899]">
                 {navigation.length > 0 ? (
                     navigation.map((section) => (
                         <div key={`section-${section.group}`} className="mb-8">
-                            <h3 className="px-2 text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                            <h3 className="px-2 text-xs font-semibold text-black uppercase tracking-wider">
                                 {section.group}
                             </h3>
                             <div className="mt-2 space-y-1">
@@ -212,7 +215,7 @@ const Sidebar = ({ user, closeSidebar }) => {
                         </div>
                     ))
                 ) : (
-                    <div className="text-center text-gray-300 py-4">
+                    <div className="text-center text-black py-4">
                         No tienes acceso a ningún módulo
                     </div>
                 )}
@@ -221,7 +224,6 @@ const Sidebar = ({ user, closeSidebar }) => {
     );
 };
 
-// Menú de respaldo
 const getFallbackNavigation = () => {
     return [
         {

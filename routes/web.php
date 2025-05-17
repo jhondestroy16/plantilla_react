@@ -8,8 +8,10 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RutasController;
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 Route::get('/', function () {
     return redirect()->route('login'); // Redirige directamente al login
@@ -144,4 +146,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/departamentos/activar/{id}', [DepartamentoTTIController::class, 'activar'])
         ->name('departamentos.activar');
+
+    Route::get('/servicios', [ServicioController::class, 'index'])
+        ->name('servicios');
 });

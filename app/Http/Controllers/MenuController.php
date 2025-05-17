@@ -115,7 +115,7 @@ class MenuController extends Controller
 
         $menus = Menu::where('estado', true)
             ->with(['permisos:id,name'])
-            ->orderBy('orden', 'asc')
+            ->orderBy('id', 'asc')
             ->get();
 
         $userPermissions = $user->getAllPermissions()->pluck('name');
