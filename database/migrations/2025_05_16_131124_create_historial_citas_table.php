@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('historial_citas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cita_id');
-            $table->unsignedBigInteger('id_usuario'); // quien realizó el cambio (opcional)
+            $table->unsignedBigInteger('id_usuario');
             $table->enum('accion', ['creada', 'confirmada', 'cancelada', 'reprogramada', 'realizada']);
-            $table->text('descripcion')->nullable(); // motivo o detalle
+            $table->text('descripcion')->nullable();
             $table->timestamps();
 
             $table->foreign('cita_id')->references('id')->on('citas');

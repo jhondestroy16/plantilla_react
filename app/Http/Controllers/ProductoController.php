@@ -9,18 +9,20 @@ use Inertia\Inertia;
 
 class ProductoController extends Controller
 {
-    public function index(Request $request){
-        if (!$request->ajax()) return redirect('/');
+    public function index(Request $request)
+    {
 
-        $productos = Producto::orderBy('id','asc')->paginate(10);
+        $productos = Producto::orderBy('id', 'asc')->paginate(10);
 
         return Inertia::render('Productos', [
             'productos' => $productos,
         ]);
     }
 
-    public function store(Request $request){
-        if (!$request->ajax()) return redirect('/');
+    public function store(Request $request)
+    {
+        if (!$request->ajax())
+            return redirect('/');
 
         $request->validate([
             'nombre' => 'required|string|max:255',
@@ -37,8 +39,10 @@ class ProductoController extends Controller
         return redirect()->route('productos');
     }
 
-    public function update(Request $request, $id){
-        if (!$request->ajax()) return redirect('/');
+    public function update(Request $request, $id)
+    {
+        if (!$request->ajax())
+            return redirect('/');
 
         $request->validate([
             'nombre' => 'required|string|max:255',
@@ -56,16 +60,20 @@ class ProductoController extends Controller
         return redirect()->route('productos');
     }
 
-    public function desactivar(Request $request, $id){
-        if (!$request->ajax()) return redirect('/');
+    public function desactivar(Request $request, $id)
+    {
+        if (!$request->ajax())
+            return redirect('/');
         $empresa = Producto::findOrFail($id);
         $empresa->estado = false;
         $empresa->save();
 
         return redirect()->route('productos');
     }
-    public function activar(Request $request, $id){
-        if (!$request->ajax()) return redirect('/');
+    public function activar(Request $request, $id)
+    {
+        if (!$request->ajax())
+            return redirect('/');
         $empresa = Producto::findOrFail($id);
         $empresa->estado = true;
         $empresa->save();

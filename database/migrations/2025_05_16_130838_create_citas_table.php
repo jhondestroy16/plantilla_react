@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,15 +12,15 @@ return new class extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('persona_id');
+            $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('servicio_id');
-            $table->unsignedBigInteger('id_usuario'); // Dueño de la cita (ej. especialista)
             $table->dateTime('fecha');
+            $table->time('hora_inicio');
+            $table->time('hora_fin')->nullable();
             $table->enum('estado', ['pendiente', 'confirmada', 'cancelada', 'realizada'])->default('pendiente');
+            $table->decimal('total', 10, 2)->default(0);
             $table->text('notas')->nullable();
             $table->timestamps();
-
-            $table->foreign('persona_id')->references('id')->on('personas');
             $table->foreign('servicio_id')->references('id')->on('servicios');
             $table->foreign('id_usuario')->references('id')->on('users');
         });

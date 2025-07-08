@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\DepartamentoTTIController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductoController;
@@ -100,24 +99,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/productos/activar/{id}', [ProductoController::class, 'activar'])
         ->name('productos.activar');
 
-    Route::get('/empresas', [EmpresaController::class, 'index'])
-        ->name('empresas');
-
-    Route::get('/empresas/productos/{id}', [EmpresaController::class, 'productosEmpresas'])
-        ->name('empresas.productos');
-
-    Route::post('/empresas/store', [EmpresaController::class, 'store'])
-        ->name('empresas.store');
-
-    Route::put('/empresas/update/{id}', [EmpresaController::class, 'update'])
-        ->name('empresas.update');
-
-    Route::put('/empresas/delete/{id}', [EmpresaController::class, 'desactivar'])
-        ->name('empresas.desactivar');
-
-    Route::put('/empresas/activar/{id}', [EmpresaController::class, 'activar'])
-        ->name('empresas.activar');
-
     Route::get('/usuarios', [RegisteredUserController::class, 'index'])
         ->name('usuarios');
 
@@ -127,26 +108,27 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuarios/activar/{id}', [RegisteredUserController::class, 'activar'])
         ->name('usuarios.activar');
 
-    Route::get('/roles/{id}/permisos', [MenuController::class, 'permisos'])->name('roles.permisos');
-    Route::post('/roles/{id}/permisos', [MenuController::class, 'asignarPermisos'])->name('roles.permisos.asignar');
+    Route::get('/roles/{id}/permisos', [MenuController::class, 'permisos'])
+        ->name('roles.permisos');
 
-    Route::get('/roles/{roleId}/edit', [MenuController::class, 'edit'])->name('roles.edit');
+    Route::post('/roles/{id}/permisos', [MenuController::class, 'asignarPermisos'])
+        ->name('roles.permisos.asignar');
 
-    Route::get('/departamentos', [DepartamentoTTIController::class, 'index'])
-        ->name('departamentos');
-
-    Route::post('/departamentos/store', [DepartamentoTTIController::class, 'store'])
-        ->name('departamentos.store');
-
-    Route::put('/departamentos/update/{id}', [DepartamentoTTIController::class, 'update'])
-        ->name('departamentos.update');
-
-    Route::put('/departamentos/delete/{id}', [DepartamentoTTIController::class, 'desactivar'])
-        ->name('departamentos.desactivar');
-
-    Route::put('/departamentos/activar/{id}', [DepartamentoTTIController::class, 'activar'])
-        ->name('departamentos.activar');
+    Route::get('/roles/{roleId}/edit', [MenuController::class, 'edit'])
+        ->name('roles.edit');
 
     Route::get('/servicios', [ServicioController::class, 'index'])
         ->name('servicios');
+
+    Route::post('/servicios/store', [ServicioController::class, 'store'])
+        ->name('servicios.store');
+
+    Route::put('/servicios/update/{id}', [ServicioController::class, 'update'])
+        ->name('servicios.update');
+
+    Route::put('/servicios/desactivar/{id}', [ServicioController::class, 'desactivar'])
+        ->name('servicios.desactivar');
+
+    Route::put('/servicios/activar/{id}', [ServicioController::class, 'activar'])
+        ->name('servicios.activar');
 });
